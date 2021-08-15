@@ -1,0 +1,29 @@
+﻿@model FanzaActressSearch.ViewModel.PaginatedList<FanzaActressSearch.ViewModel.ViewActress>
+
+@{
+    ViewData["Title"] = "年齢認証 | 驚異のFANZA女優検索";
+}
+<div>
+    <div class="m-2 d-flex justify-content-center">
+        <h1>年齢認証</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <p>あなたは18歳以上ですか？</p>
+    </div>
+    <div class="d-flex justify-content-center small">
+        <p>
+            ここから先は、アダルト商品を扱うアダルトサイトとなります。
+            18歳未満の方のアクセスは固くお断りします。
+        </p>
+    </div>
+    <div class="m-2 d-flex justify-content-center small">
+        <a class="m-2 btn btn-light" href='/'>いいえ</a>
+        <a class="m-2 btn btn-primary" onclick="jumpUrl('@ViewData["Url"]')">はい</a>
+    </div>
+</div>
+<script>
+    function jumpUrl(url) {
+        document.cookie = "Verification=Ok;Path=/";
+        location.replace(url);
+    }
+</script>

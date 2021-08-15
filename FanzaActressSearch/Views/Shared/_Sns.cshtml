@@ -1,0 +1,80 @@
+﻿@model FanzaActressSearch.ViewModel.PaginatedList<FanzaActressSearch.ViewModel.ViewActress>
+
+<div class="container-cancellation">
+    <section>
+        <div>
+            <section>
+                <div class="form-inline d-flex justify-content-center">
+                    検索対象:<span class="nav-bg-color font-weight-bold">@ViewData["Sns"]をやっている</span>:対象女優:@(Model.Total)人
+                    <span class="small">(@ViewData["UpdateDate"])</span>
+                </div>
+            </section>
+        </div>
+        <div class="my-3">
+            <section>
+                <div class="actressList">
+                    <ul class="p-1">
+                        @foreach (var item in Model)
+                        {
+                            <li class="Bustup border rounded">
+                                <div class="d-flex justify-content align-items-center">
+                                    <a href="/actress/@item.Id"><img class="rounded-circle" src="@item.ImageSURL" alt='@(item.Name)のバストアップ画像'></a>
+                                    @{
+                                        var heart = "heart text-danger fa-heart ";
+                                        heart += item.IsHeart ? "fas" : "far";
+                                        <i class="px-1 @heart" data-id="@item.Id" data-heart="@item.IsHeart"></i>
+                                        if (item.Bust == "-")
+                                        {
+                                            <a class="Bust">-</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="Bust" href="/?searchText=@item.Bust">@Html.DisplayFor(modelItem => item.Bust)</a>
+                                        }
+                                        if (item.Cup == "-")
+                                        {
+                                            <a class="Cup">(-)</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="Cup" href="/?searchText=@item.Cup">(@Html.DisplayFor(modelItem => item.Cup))</a>
+                                        }
+                                    }
+                                    <div class="ActressName px-1">
+                                        <a href="/actress/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                                    </div>
+                                    <div class="d-flex justify-content-end align-items-center ml-auto">
+                                        @if (ViewData["Sns"].ToString() == "Twitter")
+                                        {
+                                            <a href="https://twitter.com/@(item.TwitterName)" rel="noopener" target="_blank"><i class="p-1 fab fa-lg fa-twitter"></i></a>
+                                        }
+                                        else if (ViewData["Sns"].ToString() == "Instagram")
+                                        {
+                                            <a href="https://www.instagram.com/@(item.InstagramName)" rel="noopener" target="_blank"><i class="p-1 fab fa-lg fa-instagram"></i></a>
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </section>
+            <div class="clearfix" />
+        </div>
+    </section>
+</div>
+<hr class="featurette-divider">
+<aside>
+    <div class="d-block d-md-none">
+        <div class="form-inline d-flex justify-content-center">
+            <ins class="dmm-widget-placement" data-id="dbc0d84faf1d2ff178806141db0ebf0c" style="background:transparent"></ins>
+            <script src="https://widget-view.dmm.com/js/placement.js" class="dmm-widget-scripts" data-id="dbc0d84faf1d2ff178806141db0ebf0c"></script>
+        </div>
+    </div>
+    <div class="d-none d-md-block">
+        <div class="form-inline d-flex justify-content-center">
+            <ins class="dmm-widget-placement" data-id="7f0bcd34af11fbf6ad4c5450cb3e7d3f" style="background:transparent"></ins>
+            <script src="https://widget-view.dmm.com/js/placement.js" class="dmm-widget-scripts" data-id="7f0bcd34af11fbf6ad4c5450cb3e7d3f"></script>
+        </div>
+    </div>
+</aside>

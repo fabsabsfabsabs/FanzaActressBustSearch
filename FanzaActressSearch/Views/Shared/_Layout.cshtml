@@ -1,0 +1,153 @@
+﻿@namespace FanzaActressSearch.ViewModel.SearchText
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@ViewData["Title"]">
+    <meta property="og:url" content="@ViewData["OgUrl"]">
+    <meta property="og:image" content="@ViewData["OgImage"]">
+    <meta property="og:description" name="description" content="@ViewData["OgDescription"]" />
+    <meta property="og:site_name" content="驚異のFANZA女優検索">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="google-site-verification" content="DqjyAiqdYF9qk5AwYD_jNGbbZwFgf3AIqpLzfn8i3Qc" />
+    <link rel="canonical" href="@ViewData["Canonical"]">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/minireset.css/minireset.min.css">
+    @await RenderSectionAsync("Csss", required: false)
+    <script src="~/js/top.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0MDFRK62HY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0MDFRK62HY');
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light nav-bg-color border-bottom box-shadow mb-3 navbar-collapse justify-content-between">
+            <div>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/image/fabs.png" class="mb-1" width="16" height="16">
+                    驚異のFANZA女優検索
+                </a>
+            </div>
+            <div>
+                <form class="form-inline d-flex" asp-controller="" asp-action="Index" method="get">
+                    @foreach (var word in (ViewData["SearchWordList"] as List<SearchRelationText>).Where(w => w.Type == SearchRelationTextType.Down))
+                    {
+                        <div class="mx-3">
+                            <div class="small">
+                                <i class="fas fa-caret-down"></i><span class="">ダウンボタン</span>
+                                <i class="far fa-question-circle" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="ダウンするボタン（サイズを-1cm、カップを-1カップ）。"></i>
+                            </div>
+                            @await Html.PartialAsync("_SearchButton", word)
+                        </div>
+                    }
+                    <div class="input-group">
+                        <input class="form-control rounded-pill" name="searchText" size="25" value="@ViewData["SearchText"]" type="search" placeholder="サイズかカップを入力" autocomplete="off" aria-label="Search" list="historyList" />
+                        <button type="submit" class="btn btn-sm">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    @foreach (var word in (ViewData["SearchWordList"] as List<SearchRelationText>).Where(w => w.Type == SearchRelationTextType.Up))
+                    {
+                        <div class="mx-3">
+                            <div class="small">
+                                <i class="fas fa-caret-up border"></i><span class="">アップボタン</span>
+                                <i class="far fa-question-circle" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="アップするボタン（サイズを+1cm、カップを+1カップ）。"></i>
+                            </div>
+                            @await Html.PartialAsync("_SearchButton", word)
+                        </div>
+                    }
+                    @foreach (var word in (ViewData["SearchWordList"] as List<SearchRelationText>).Where(w => w.Type == SearchRelationTextType.Equal))
+                    {
+                        <div class="mx-5">
+                            <div class="small">
+                                <i class="fas fa-greater-than-equal"></i><span>以上ボタン</span>
+                                <i class="far fa-question-circle" tabindex="0" data-toggle="popover" data-trigger="focus" data-content="以上にするボタン（100cmを「100cm以上」、Fカップを「Fカップ以上」）。"></i>
+                            </div>
+                            @await Html.PartialAsync("_SearchButton", word)
+                        </div>
+                    }
+                    @{
+                        var bustSize = ViewData["BustSize"] as FanzaActressSearch.ViewModel.Select.IViewSelect;
+                        <div class="mx-1">
+                            <div class="small">
+                                <span>サイズ選択</span>
+                            </div>
+                            <select id="@bustSize.Id" class="form-control form-control-sm" onchange="changeBust('@(bustSize.Id)')">
+                                @{
+                                    foreach (var item in bustSize.Items)
+                                    {
+                                        <option value=@(item.Key) selected="@(bustSize.Value == item.Key)">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        var bustCup = ViewData["BustCup"] as FanzaActressSearch.ViewModel.Select.IViewSelect;
+                        <div class="mx-1">
+                            <div class="small">
+                                <span>カップ選択</span>
+                            </div>
+                            <select id="@bustCup.Id" class="form-control form-control-sm" onchange="changeBust('@(bustCup.Id)')">
+                                @{
+                                    foreach (var item in bustCup.Items)
+                                    {
+                                        <option value=@(item.Key) selected="@(bustCup.Value == item.Key)">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    }
+                </form>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <datalist id="historyList">
+                @if (ViewData["History"] != null)
+                {
+                @foreach (var his in (ViewData["History"] as string).Split(","))
+                    {
+                <option value="@his"></option>
+                    }
+                }
+            </datalist>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="p-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container d-flex justify-content-center">
+            <a href="https://affiliate.dmm.com/api/"><img src="https://pics.dmm.com/af/web_service/com_135_17.gif" width="135" height="17" alt="WEB SERVICE BY DMM.com" /></a>&copy; 2021 - 驚異のFANZA女優検索 - ご意見ご感想は<a href="https://twitter.com/fabsabsfabsabs" rel="noopener" target="_blank">@@fabsabsfabsabs</a>まで
+        </div>
+    </footer>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+
+</html>

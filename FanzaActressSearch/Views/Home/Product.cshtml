@@ -1,0 +1,116 @@
+﻿@model FanzaActressSearch.ViewModel.ViewProductOne
+
+@{
+    ViewData["Title"] = $"{Model.Title} | {ViewData["ActressName"]} | 驚異のFANZA女優検索";
+    ViewData["OgImage"] = Model.ImageUrlLarge;
+    ViewData["OgDescription"] = $"{Model.Title} | {ViewData["ActressName"]}のページ。発売日:{Model.Date}。時間:{Model.Volume}分。女優:{Model.ActressNames}。ジャンル:{Model.GenreNames}。シリーズ:{Model.SeriesNames}。メーカー:{Model.MakerNames}。";
+}
+@section Csss {
+    <link href="@Url.Content("~/css/product.css")" rel="stylesheet" type="text/css" />
+}
+
+<article>
+    <nav aria-label="breadcrumb">
+        <ol class="small breadcrumb">
+            <li class="breadcrumb-item"><a href="/?SearchText=@(ViewData["SearchText"])">トップ</a></li>
+            <li class="breadcrumb-item"><a href="/actress/@(ViewData["ActressId"])/@(ViewData["ActressName"])">@(ViewData["ActressName"])</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+    <header>
+        <div>
+            <div class="d-none d-md-block">
+                <div>
+                    <a href="@(Model.Url)" rel="sponsored, noopener" target="_blank">
+                        <img class="p-1" width="720" height="480" src="@(Model.ImageUrlLarge)" alt='@(Model.Title)のジャケット両面画像' title="@Model.Title">
+                    </a>
+                </div>
+                @{
+                    if (Model.SampleMoviePcURL != "")
+                    {
+                        <div>
+                            <iframe src="@(Model.SampleMoviePcURL)" width="720" height="480" scrolling="no" border="0" style="border:none;" frameborder="0" allowfullscreen="" allow="autoplay"></iframe>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="d-block d-md-none">
+                <div>
+                    <a href="@(Model.Url)" rel="sponsored, noopener" target="_blank" style="margin-left:-25px;margin-right:-25px;">
+                        <img class="p-1 JacketSp" src="@(Model.ImageUrlLarge)" alt='@(Model.Title)のジャケット両面画像' title="@Model.Title">
+                    </a>
+                </div>
+                @{
+                    if (Model.SampleMovieSpURL != "")
+                    {
+                        <div class="MovieSp" style="margin-left:-25px;margin-right:-25px;">
+                            <iframe class="p-1" src="@(Model.SampleMovieSpURL)" scrolling="no" border="0" style="border:none;" frameborder="0" allowfullscreen="" allow="autoplay"></iframe>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </header>
+    <section>
+        <h1 class="font-weight-bold h2">
+            <a href="@(Model.Url)" rel="sponsored, noopener" target="_blank">@Model.Title</a>
+            <span class="small">
+                <a href="@Model.Url" rel="sponsored, noopener" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </span>
+        </h1>
+        <div>
+            <a>発売日:</a>
+            <a>@Model.Date</a>
+        </div>
+        <div>
+            <a>時間:</a>
+            <a>@Model.Volume 分</a>
+        </div>
+
+        <div>
+            <a>女優:</a>
+            <a>@Model.ActressNames</a>
+        </div>
+        <div>
+            <a>ジャンル:</a>
+            <a>@Model.GenreNames</a>
+        </div>
+        <div>
+            <a>シリーズ:</a>
+            <a>@Model.SeriesNames</a>
+        </div>
+        <div>
+            <a>メーカー:</a>
+            <a>@Model.MakerNames</a>
+        </div>
+        <div class="ImageList">
+            <ul>
+                @for (int i = 0; i < @Model.SampleImageURLCount; i++)
+                {
+                    <li class="SingleList rounded">
+                        <div>
+                            <div class="SingleImage">
+                                <img src="@(Model.SampleImageURL + (i + 1) + ".jpg")" alt='@(Model.Title)のサンプル画像'>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div class="clearfix" />
+        </div>
+    </section>
+</article>
+<aside>
+    <div class="d-none d-md-block">
+        <ins class="dmm-widget-placement" data-id="c08ce639eca78e1883dfb6eb96d3328f" style="background:transparent"></ins>
+        <script src="https://widget-view.dmm.co.jp/js/placement.js" class="dmm-widget-scripts" data-id="c08ce639eca78e1883dfb6eb96d3328f"></script>
+        <ins class="dmm-widget-placement" data-id="9f583df9bc32970b9aa59b444462da00" style="background:transparent"></ins>
+        <script src="https://widget-view.dmm.co.jp/js/placement.js" class="dmm-widget-scripts" data-id="9f583df9bc32970b9aa59b444462da00"></script>
+    </div>
+    <div class="d-block d-md-none" style="margin-left:-25px">
+        <ins class="dmm-widget-placement" data-id="3481bf12e78bd346a4b0b7df314ed2b9" style="background:transparent"></ins>
+        <script src="https://widget-view.dmm.co.jp/js/placement.js" class="dmm-widget-scripts" data-id="3481bf12e78bd346a4b0b7df314ed2b9"></script>
+        <ins class="dmm-widget-placement" data-id="41c6d3d0e418035faa4709c5e46d7e97" style="background:transparent"></ins>
+        <script src="https://widget-view.dmm.co.jp/js/placement.js" class="dmm-widget-scripts" data-id="41c6d3d0e418035faa4709c5e46d7e97"></script>
+    </div>
+</aside>

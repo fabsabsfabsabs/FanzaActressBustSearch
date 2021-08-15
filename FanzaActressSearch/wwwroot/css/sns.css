@@ -1,0 +1,68 @@
+﻿.Bustup {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    width: 100%;
+    max-width: 250px;
+}
+
+.Bustup img {
+    height: 32px;
+    width: 32px;
+}
+
+.Bustup img:hover {
+    transform: scale(1.2);
+    transition-duration: 0.25s;
+}
+
+.ActressName {
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*----*/
+.Bust {
+    width: 28px;
+}
+
+.Cup {
+    width: 23px;
+}
+/*----*/
+
+.container-cancellation {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media screen and (min-width: 576px) {
+    .container-cancellation {
+        margin-left: calc(-0.5 * (100vw - 540px));
+        margin-right: calc(-0.5 * (100vw - 540px));
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container-cancellation {
+        margin-left: calc(-0.5 * (100vw - 720px));
+        margin-right: calc(-0.5 * (100vw - 720px));
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .container-cancellation {
+        margin-left: calc(-0.5 * (100vw - 960px));
+        margin-right: calc(-0.5 * (100vw - 960px));
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container-cancellation {
+        margin-left: calc(-0.5 * (100vw - 1140px));
+        margin-right: calc(-0.5 * (100vw - 1140px));
+    }
+}

@@ -1,0 +1,62 @@
+﻿@model FanzaActressSearch.ViewModel.PaginatedParameter
+
+@if (Model.IsFirstPage)
+{
+    <li class="page-item">
+        <a class="page-link" href="@(Model.Url)page=1">
+            <span>&laquo;&laquo;</span>
+        </a>
+    </li>
+}
+@if (Model.IsBeginPage)
+{
+    <li class="page-item">
+        <a class="page-link" href="@(Model.Url)page=@(Model.Page - 1)">
+            <span>&laquo;</span>
+        </a>
+    </li>
+}
+@if (Model.IsFirstPage)
+{
+    <li class="page-item disabled">
+        <a class="page-link">
+            <span>…</span>
+        </a>
+    </li>
+}
+@if (Model.BeginPage != Model.EndPage)
+{
+    @for (int i = Model.BeginPage; i <= Model.EndPage; i++)
+    {
+        var active = i == Model.Page ? "active" : "";
+        <li class="page-item @active">
+            <a class="page-link" href="@(Model.Url)page=@(i)">
+                <span>@i</span>
+            </a>
+        </li>
+    }
+}
+@if (Model.IsLastPage)
+{
+    <li class="page-item disabled">
+        <a class="page-link">
+            <span>…</span>
+        </a>
+    </li>
+}
+@if (Model.IsEndPage)
+{
+    <li class="page-item">
+        <a class="page-link" href="@(Model.Url)page=@(Model.Page + 1)">
+            <span>&raquo;</span>
+        </a>
+    </li>
+}
+@if (Model.IsLastPage)
+{
+    <li class="page-item">
+        <a class="page-link" href="@(Model.Url)page=@(Model.LastPage)">
+            <span>&raquo;&raquo;</span>
+        </a>
+    </li>
+}

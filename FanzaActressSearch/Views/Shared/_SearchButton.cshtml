@@ -1,0 +1,16 @@
+﻿@model FanzaActressSearch.ViewModel.SearchText.SearchRelationText
+
+<div>
+    @{
+        var onclick = Model.Link == "-" ? "" : $"searchWordClick('{Model.Link}')";
+        var disabled = Model.Link == "-" ? "disabled" : "";
+    }
+    <span class="searchword btn btn-outline-primary btn-sm text-left @disabled" onclick="@onclick">
+        <i class="text-danger far fa-heart"></i>
+        @Model.Link
+        <span class="small float-right" style="padding-top:2px;">
+            <i class="fas fa-search text-body"></i>
+        </span>
+    </span>
+</div>
+

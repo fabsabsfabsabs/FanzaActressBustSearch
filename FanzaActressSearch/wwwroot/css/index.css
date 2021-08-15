@@ -1,0 +1,73 @@
+﻿.BustupS {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    width: 100%;
+    max-width: 320px;
+}
+
+.BustupS img {
+    height: 32px;
+    width: 32px;
+}
+
+.BustupS img:hover {
+    transform: scale(1.2);
+    transition-duration: 0.25s;
+}
+
+.ActressNameS {
+    width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*----*/
+
+.BustupM {
+    padding: 0;
+    margin: 0;
+    float: left;
+    list-style: none;
+    width: 160px;
+}
+
+.BustupM img {
+    height: 135px;
+    width: 135px;
+}
+
+.BustupM img:hover {
+    transform: scale(1.1);
+    transition-duration: 0.25s;
+}
+
+.BustupM .ActressImage {
+    position: relative;
+    padding: 10px;
+}
+
+.ActressNameM {
+    width: 90px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*----*/
+
+.Bust {
+    width: 28px;
+}
+
+.Cup {
+    width: 23px;
+}
+
+.WorkCounter {
+    width: 44px;
+}
+
+

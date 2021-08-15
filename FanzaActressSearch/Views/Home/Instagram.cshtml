@@ -1,0 +1,12 @@
+﻿@model FanzaActressSearch.ViewModel.PaginatedList<FanzaActressSearch.ViewModel.ViewActress>
+
+@{
+    ViewData["Title"] = "InstagramをやっているFANZA女優一覧 | 驚異のFANZA女優検索";
+    ViewData["OgImage"] = "";
+    ViewData["OgDescription"] = "InstagramをやっているFANZA女優一覧";
+}
+@section Csss {
+    <link href="@Url.Content("~/css/sns.css")" rel="stylesheet" type="text/css" />
+}
+
+@await Html.PartialAsync("_Sns", Model)

@@ -1,0 +1,23 @@
+﻿@model FanzaActressSearch.ViewModel.PaginatedParameter
+
+<div class="form-inline d-flex justify-content-center">
+    <nav aria-label="navigation">
+        <div class="row border m-2">
+            <div class="ml-auto">
+                <div class="d-none d-sm-block">
+                    <ul class="pagination pr-2" style="margin-bottom: 0px;">
+                        @await Html.PartialAsync("_PagerPage", Model)
+                    </ul>
+                </div>
+                <div class="d-block d-sm-none">
+                    <ul class="pagination pagination-sm pr-2" style="margin-bottom: 0px;">
+                        @await Html.PartialAsync("_PagerPage", Model)
+                    </ul>
+                </div>
+            </div>
+            <span class="small d-flex align-items-center">
+                @Model.Result
+            </span>
+        </div>
+    </nav>
+</div>
